@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBC.OpenAPI.SDK.ExchangeRates", "TBC.OpenAPI.SDK.ExchangeRates\TBC.OpenAPI.SDK.ExchangeRates.csproj", "{44A810A7-16D5-4346-B4C7-9467D67EE161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBC.OpenAPI.SDK.ExchangeRates", "TBC.OpenAPI.SDK.ExchangeRates\TBC.OpenAPI.SDK.ExchangeRates.csproj", "{44A810A7-16D5-4346-B4C7-9467D67EE161}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4F2B05EE-5B83-4138-9A47-81B058D3EFDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{61538C8B-2EB7-4662-A730-A08AB3245370}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{BC55251F-44C0-49A7-801D-B2B0B7A68EC2}"
+	ProjectSection(SolutionItems) = preProject
+		codeql-analysis.yml = codeql-analysis.yml
+		dependency-review.yml = dependency-review.yml
+		main.yml = main.yml
+		nuget.yml = nuget.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +33,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{44A810A7-16D5-4346-B4C7-9467D67EE161} = {4F2B05EE-5B83-4138-9A47-81B058D3EFDD}
+		{BC55251F-44C0-49A7-801D-B2B0B7A68EC2} = {61538C8B-2EB7-4662-A730-A08AB3245370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {938469E3-7064-4A8F-BAF3-C7EF2F4D5E9C}
