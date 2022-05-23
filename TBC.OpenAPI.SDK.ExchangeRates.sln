@@ -7,16 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F068D92C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D93C5C4E-65C3-4AE2-98B7-51BBDA578C3A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F4D7D578-F4DD-4499-8D0B-73C6ACB7B619}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{3807C069-7C09-4A60-800F-53EF1C67570C}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
-		.github\workflows\dependency-review.yml = .github\workflows\dependency-review.yml
-		.github\workflows\main.yml = .github\workflows\main.yml
-		.github\workflows\nuget.yml = .github\workflows\nuget.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{AECC49E6-46F0-446A-ADC2-7B7B5BC36153}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -65,7 +55,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3807C069-7C09-4A60-800F-53EF1C67570C} = {F4D7D578-F4DD-4499-8D0B-73C6ACB7B619}
 		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC} = {D93C5C4E-65C3-4AE2-98B7-51BBDA578C3A}
 		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF} = {F068D92C-EC84-452F-BF81-BD548EAE5BAF}
 		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
