@@ -1,0 +1,22 @@
+<Project>
+    <PropertyGroup>
+        <!--
+          The compiler accepts syntax from the latest released version of the compiler (including minor version).
+          See: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#langversion
+          -->
+        <LangVersion>latest</LangVersion>
+        <!--
+          Use the faster NuGet package restore algorithm.
+          This value will be 'true' by default in upcoming NuGet releases.
+          See: https://github.com/NuGet/Home/issues/8791
+          -->
+        <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
+        <!--
+          Prevent Visual Studio IncrementalClean from deleting transitively-acquired content.
+          This is an unexpected behavior and is different from what dotnet.exe build does.
+          This value will be 'true' by default in upcoming MSBuild versions.
+          See: https://github.com/dotnet/msbuild/issues/1054#issuecomment-847959047
+          -->
+        <MSBuildCopyContentTransitively>true</MSBuildCopyContentTransitively>
+    </PropertyGroup>
+</Project>
