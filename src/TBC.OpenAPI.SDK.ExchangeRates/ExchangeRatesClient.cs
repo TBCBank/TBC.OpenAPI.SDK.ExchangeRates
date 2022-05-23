@@ -13,14 +13,83 @@ namespace TBC.OpenAPI.SDK.ExchangeRates
             _http = http;
         }
 
-        public async Task<SomeObject> GetSomeObjectAsync(CancellationToken cancellationToken = default)
+
+        #region CommercialRates
+        /// <summary>
+        /// კომერციული კურსის დასაბრუნებელი მეთოდი
+        /// </summary>
+        /// <param name="currencies">(required) ვალუტები, რომლებიც უნდა დაბრუნდეს</param>
+        /// <param name="cancellationToken">(optional)</param>
+        /// <returns>აბრუნებს გადაცემული ვალუტების კურსებს</returns>
+
+        public async Task<GetCommercialRatesResponse?> GetCommercialRates(string[] currencies, CancellationToken cancellationToken = default)
         {
-            var result = await _http.GetJsonAsync<SomeObject>("/", cancellationToken).ConfigureAwait(false);
+            var result = await _http.GetJsonAsync<GetCommercialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
 
             if (!result.IsSuccess)
                 throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
 
             return result.Data!;
         }
+
+        /// <summary>
+        /// კომერციული კურსის დასაკონვერტირებელი მეთოდი
+        /// </summary>
+        /// <param name="amount">(required) დასაკონვენტირებელი თანხის რაოდენობა</param>
+        /// <param name="from">(required) ვალუტა, საიდანაც უნდა დაკონვერტირდეს</param>
+        /// <param name="to">(required) ვალუტა, რაშიც უნდა დაკონვერტირდეს</param>
+        /// <param name="cancellationToken">(optional)</param>
+        /// <returns>აბრუნებს დაკონვერტირებული ვალუტის კურსს</returns>
+
+        public async Task<ConvertCommercialRatesResponse?> ConvertCommercialRate(decimal amount, string from, string to, CancellationToken cancellationToken = default)
+        {
+            var result = await _http.GetJsonAsync<ConvertCommercialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
+
+            if (!result.IsSuccess)
+                throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
+
+            return result.Data!;
+        }
+        #endregion
+
+
+
+
+        #region Official Rates
+        /// <summary>
+        /// ოფიციალური კურსების დასაბრუნებელი მეთოდი
+        /// </summary>
+        /// <param name="currencies">(optional) ვალუტების მასივი, რომლებიც უნდა დაბრუნდეს(ამ პარამეტრის არგადაცემის შემთხვევაში აბრუნებს ყველა ვალუტას)</param>
+        /// <param name="cancellationToken">(optional)</param>
+        /// <returns>აბრუნებს ყველა ვალუტის ან გადაცემული ვალუტების კურსებს</returns>
+
+        public async Task<List<GetOfficialRate>?> GetOfficialRates(string[]? currencies = null, CancellationToken cancellationToken = default)
+        {
+            var result = await _http.GetJsonAsync<List<GetOfficialRate>?>("/", cancellationToken).ConfigureAwait(false);
+
+            if (!result.IsSuccess)
+                throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
+
+            return result.Data!;
+        }
+
+        /// <summary>
+        /// ოფიციალური კურსის დასაკონვერტირებელი მეთოდი
+        /// </summary>
+        /// <param name="amount">(required) დასაკონვენტირებელი თანხის რაოდენობა</param>
+        /// <param name="from">(required) ვალუტა, საიდანაც უნდა დაკონვერტირდეს</param>
+        /// <param name="to">(required) ვალუტა, რაშიც უნდა დაკონვერტირდეს</param>
+        /// <param name="cancellationToken">(optional)</param>
+        /// <returns>დაკონვერტირებული ვალუტის კურსი</returns>
+        public async Task<ConvertOfficialRatesResponse?> ConvertOfficialRates(string amount, string from, string to, CancellationToken cancellationToken = default)
+        {
+            var result = await _http.GetJsonAsync<ConvertOfficialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
+
+            if (!result.IsSuccess)
+                throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
+
+            return result.Data!;
+        }
+        #endregion
     }
 }
