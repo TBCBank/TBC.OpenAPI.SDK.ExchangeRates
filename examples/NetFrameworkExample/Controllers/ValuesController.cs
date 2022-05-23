@@ -12,7 +12,7 @@ namespace NetFrameworkExample.Controllers
         {
             var exchangeRatesClient = OpenApiClientFactory.Instance.GetExchangeRatesClient();
 
-            var result = await exchangeRatesClient.GetSomeObjectAsync();
+            var result = await exchangeRatesClient.GetOfficialRates(new string[] { "EUR", "USD"});
 
             return Ok(result);
         }

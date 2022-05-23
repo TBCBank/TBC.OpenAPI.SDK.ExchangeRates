@@ -3,7 +3,7 @@
     /// <summary>
     /// ოფიციალური კურსის მოდელი
     /// </summary>
-    public class GetOfficialRate
+    public class OfficialRate
     {
         /// <summary>
         /// ვალუტა
