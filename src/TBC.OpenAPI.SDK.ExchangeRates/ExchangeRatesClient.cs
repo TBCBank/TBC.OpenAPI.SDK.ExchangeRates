@@ -1,5 +1,6 @@
 ﻿using TBC.OpenAPI.SDK.Core;
 using TBC.OpenAPI.SDK.Core.Exceptions;
+using TBC.OpenAPI.SDK.Core.Models;
 using TBC.OpenAPI.SDK.ExchangeRates.Models;
 
 namespace TBC.OpenAPI.SDK.ExchangeRates
@@ -24,7 +25,10 @@ namespace TBC.OpenAPI.SDK.ExchangeRates
 
         public async Task<GetCommercialRatesResponse?> GetCommercialRates(string[] currencies, CancellationToken cancellationToken = default)
         {
-            var result = await _http.GetJsonAsync<GetCommercialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
+            var queryParams = new QueryParamCollection();
+            queryParams.Add("currency", currencies.ToString());
+
+            var result = await _http.GetJsonAsync<GetCommercialRatesResponse>("/commercial", queryParams , cancellationToken).ConfigureAwait(false);
 
             if (!result.IsSuccess)
                 throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
@@ -43,7 +47,12 @@ namespace TBC.OpenAPI.SDK.ExchangeRates
 
         public async Task<ConvertCommercialRatesResponse?> ConvertCommercialRate(decimal amount, string from, string to, CancellationToken cancellationToken = default)
         {
-            var result = await _http.GetJsonAsync<ConvertCommercialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
+            var queryParams = new QueryParamCollection();
+            queryParams.Add("amount", amount);
+            queryParams.Add("from", from);
+            queryParams.Add("to", to);
+
+            var result = await _http.GetJsonAsync<ConvertCommercialRatesResponse>("/commercial/convert", queryParams,  cancellationToken).ConfigureAwait(false);
 
             if (!result.IsSuccess)
                 throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
@@ -65,7 +74,13 @@ namespace TBC.OpenAPI.SDK.ExchangeRates
 
         public async Task<List<GetOfficialRate>?> GetOfficialRates(string[]? currencies = null, CancellationToken cancellationToken = default)
         {
-            var result = await _http.GetJsonAsync<List<GetOfficialRate>?>("/", cancellationToken).ConfigureAwait(false);
+            var queryParams = new QueryParamCollection();
+            if (currencies?.Any() ?? false)
+            {
+                queryParams.Add("currency", currencies.ToString());
+            }
+
+            var result = await _http.GetJsonAsync<List<GetOfficialRate>?>("/nbg", queryParams, cancellationToken).ConfigureAwait(false);
 
             if (!result.IsSuccess)
                 throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
@@ -83,7 +98,12 @@ namespace TBC.OpenAPI.SDK.ExchangeRates
         /// <returns>დაკონვერტირებული ვალუტის კურსი</returns>
         public async Task<ConvertOfficialRatesResponse?> ConvertOfficialRates(string amount, string from, string to, CancellationToken cancellationToken = default)
         {
-            var result = await _http.GetJsonAsync<ConvertOfficialRatesResponse>("/", cancellationToken).ConfigureAwait(false);
+            var queryParams = new QueryParamCollection();
+            queryParams.Add("amount", amount);
+            queryParams.Add("from", from);
+            queryParams.Add("to", to);
+
+            var result = await _http.GetJsonAsync<ConvertOfficialRatesResponse>("/nbg/convert", queryParams,  cancellationToken).ConfigureAwait(false);
 
             if (!result.IsSuccess)
                 throw new OpenApiException(result.Problem?.Title ?? "Unexpected error occurred", result.Exception);
