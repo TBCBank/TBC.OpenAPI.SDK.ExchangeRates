@@ -3,19 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBC.OpenAPI.SDK.ExchangeRates", "TBC.OpenAPI.SDK.ExchangeRates\TBC.OpenAPI.SDK.ExchangeRates.csproj", "{44A810A7-16D5-4346-B4C7-9467D67EE161}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F068D92C-EC84-452F-BF81-BD548EAE5BAF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4F2B05EE-5B83-4138-9A47-81B058D3EFDD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D93C5C4E-65C3-4AE2-98B7-51BBDA578C3A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{61538C8B-2EB7-4662-A730-A08AB3245370}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{BC55251F-44C0-49A7-801D-B2B0B7A68EC2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{AECC49E6-46F0-446A-ADC2-7B7B5BC36153}"
 	ProjectSection(SolutionItems) = preProject
-		codeql-analysis.yml = codeql-analysis.yml
-		dependency-review.yml = dependency-review.yml
-		main.yml = main.yml
-		nuget.yml = nuget.yml
+		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{322E62F9-79CE-40D6-A7D2-AC2375CF4C18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBC.OpenAPI.SDK.ExchangeRates", "src\TBC.OpenAPI.SDK.ExchangeRates\TBC.OpenAPI.SDK.ExchangeRates.csproj", "{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBC.OpenAPI.SDK.ExchangeRates.Tests", "tests\TBC.OpenAPI.SDK.ExchangeRates.Tests\TBC.OpenAPI.SDK.ExchangeRates.Tests.csproj", "{57466DFD-33C2-45F5-8C3C-AE173C8F46FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreApiAppExmaple", "examples\CoreApiAppExmaple\CoreApiAppExmaple.csproj", "{D117CA18-C90F-4C49-9A72-2ABA2CA52F07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreConsoleAppExample", "examples\CoreConsoleAppExample\CoreConsoleAppExample.csproj", "{49D22A75-78FB-452E-94B5-61300EA73EA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFrameworkExample", "examples\NetFrameworkExample\NetFrameworkExample.csproj", "{76062995-4DE6-4DBB-88A0-B181FE38878D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,19 +30,38 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{44A810A7-16D5-4346-B4C7-9467D67EE161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44A810A7-16D5-4346-B4C7-9467D67EE161}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44A810A7-16D5-4346-B4C7-9467D67EE161}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44A810A7-16D5-4346-B4C7-9467D67EE161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D22A75-78FB-452E-94B5-61300EA73EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D22A75-78FB-452E-94B5-61300EA73EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D22A75-78FB-452E-94B5-61300EA73EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D22A75-78FB-452E-94B5-61300EA73EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76062995-4DE6-4DBB-88A0-B181FE38878D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76062995-4DE6-4DBB-88A0-B181FE38878D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76062995-4DE6-4DBB-88A0-B181FE38878D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76062995-4DE6-4DBB-88A0-B181FE38878D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{44A810A7-16D5-4346-B4C7-9467D67EE161} = {4F2B05EE-5B83-4138-9A47-81B058D3EFDD}
-		{BC55251F-44C0-49A7-801D-B2B0B7A68EC2} = {61538C8B-2EB7-4662-A730-A08AB3245370}
+		{06F1D611-C3B4-493D-A40A-0ED6E22FC9EC} = {D93C5C4E-65C3-4AE2-98B7-51BBDA578C3A}
+		{57466DFD-33C2-45F5-8C3C-AE173C8F46FF} = {F068D92C-EC84-452F-BF81-BD548EAE5BAF}
+		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
+		{49D22A75-78FB-452E-94B5-61300EA73EA4} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
+		{76062995-4DE6-4DBB-88A0-B181FE38878D} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {938469E3-7064-4A8F-BAF3-C7EF2F4D5E9C}
+		SolutionGuid = {6EA70694-3D75-4295-9BE5-B779CA933036}
 	EndGlobalSection
 EndGlobal
