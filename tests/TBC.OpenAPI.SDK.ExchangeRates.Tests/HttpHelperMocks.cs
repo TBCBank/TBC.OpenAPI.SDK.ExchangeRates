@@ -66,12 +66,12 @@ namespace TBC.OpenAPI.SDK.Core.Tests
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(400)
-                        .WithBodyAsJson(new ProblemDetails
+                        .WithBodyAsJson(new
                         {
-                            Title = ErrorMessage,
-                            Detail = ErrorMessage,
-                            Type = "error_type",
-                            Status = (int)HttpStatusCode.BadRequest
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
                         })
                 );
 
@@ -105,12 +105,12 @@ namespace TBC.OpenAPI.SDK.Core.Tests
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(400)
-                        .WithBodyAsJson(new ProblemDetails
+                        .WithBodyAsJson(new
                         {
-                            Title = ErrorMessage,
-                            Detail = ErrorMessage,
-                            Type = "error_type",
-                            Status = (int)HttpStatusCode.BadRequest
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
                         })
                 );
 
@@ -149,12 +149,12 @@ namespace TBC.OpenAPI.SDK.Core.Tests
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(400)
-                        .WithBodyAsJson(new ProblemDetails
+                        .WithBodyAsJson(new
                         {
-                            Title = ErrorMessage,
-                            Detail = ErrorMessage,
-                            Type = "error_type",
-                            Status = (int)HttpStatusCode.BadRequest
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
                         })
                 );
 
@@ -197,12 +197,12 @@ namespace TBC.OpenAPI.SDK.Core.Tests
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(400)
-                        .WithBodyAsJson(new ProblemDetails
+                        .WithBodyAsJson(new
                         {
-                            Title = ErrorMessage,
-                            Detail = ErrorMessage,
-                            Type = "error_type",
-                            Status = (int)HttpStatusCode.BadRequest
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
                         })
                 );
             #endregion

@@ -47,7 +47,8 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 
             Func<Task> act = async () => await _client.ConvertCommercialRate(100.5M, "AAA", "AAA", CancellationToken.None);
 
-            await act.Should().ThrowAsync<OpenApiException>();
+            await act.Should().ThrowAsync<OpenApiException>()
+                .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));
         }
 
         [Fact]
@@ -72,7 +73,8 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 
             Func <Task> act = async () => await _client.GetCommercialRates(new string[] { "AAA" }, CancellationToken.None);
 
-            await act.Should().ThrowAsync<OpenApiException>();
+            await act.Should().ThrowAsync<OpenApiException>()
+                .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));
         }
 
         [Fact]
@@ -98,7 +100,8 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 
             Func<Task> act = async () => await _client.GetOfficialRates(new string[] { "AAA" }, CancellationToken.None);
 
-            await act.Should().ThrowAsync<OpenApiException>();
+            await act.Should().ThrowAsync<OpenApiException>()
+                .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));
         }
 
         [Fact]
@@ -121,7 +124,8 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 
             Func<Task> act = async () => await _client.ConvertOfficialRates(100.5M, "AAA", "AAA", CancellationToken.None);
 
-            await act.Should().ThrowAsync<OpenApiException>();
+            await act.Should().ThrowAsync<OpenApiException>()
+                        .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));
         }
     }
 }
