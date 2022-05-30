@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 using TBC.OpenAPI.SDK.Core.Models;
-using TBC.OpenAPI.SDK.Core.Tests.Models;
+using TBC.OpenAPI.SDK.ExchangeRates.Models;
+using WireMock.Matchers;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -12,6 +13,11 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 {
     public class HttpHelperMocks : IDisposable
     {
+        public static string ErrorMessage = "Error Message For Mock";
+        public static decimal ConvertionAmount = 100.5M;
+        public static decimal OfficialRateEur = 3.5M;
+        public static decimal CommercialRateToSellEur = 100.5M;
+
         private readonly WireMockServer _mockServer;
         private readonly HttpClient _httpClient;
 
@@ -33,287 +39,173 @@ namespace TBC.OpenAPI.SDK.Core.Tests
             _mockServer
                 .Given(
                     Request.Create()
-                    .WithPath("/some-resource")
+                    .WithPath("/nbg/convert")
                     .UsingMethod("GET")
 
                 )
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(200)
-                        .WithHeader("some-header", "some value")
-                        .WithHeader("another-header", "another value")
-                        .WithHeader( "param-header-key", "param-header-value")
-                        .WithBodyAsJson(new HttpTestResponseModel
+                        .WithBodyAsJson(new ConvertOfficialRatesResponse
                         {
-                            Id = 1,
-                            Name = "One",
-                            Date = new DateTime(2001, 1, 1),
-                            Numbers = new List<int>(3) { 1, 2, 3 }
+                            Amount = ConvertionAmount,
+                            From = "GEL",
+                            To = "USD",
+                            Value = 100.5M
                         })
                 );
 
             _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithParam("some-param")
-                   .UsingMethod("GET")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 1,
-                           Name = "Two",
-                           Date = new DateTime(2001, 1, 1),
-                           Numbers = new List<int>(3) { 1, 2, 3 }
-                       })
-               );
-
-            _mockServer
                 .Given(
                     Request.Create()
-                        .WithPath("/some-resource/5")
-                        .UsingMethod("GET")
+                    .WithPath("/nbg/convert")
+                    .UsingMethod("GET")
+                    .WithParam("from", new ExactMatcher("AAA"))
+
                 )
                 .RespondWith(
                     Response.Create()
-                        .WithStatusCode(404)
-                        .WithHeader("some-header", "some value")
-                        .WithHeader("another-header", "another value")
-                        .WithBody(x =>
+                        .WithStatusCode(400)
+                        .WithBodyAsJson(new
                         {
-                            var problem = new ProblemDetails
-                            {
-                                Type = "ResourceNotFound",
-                                Code = "ResourceNotFound",
-                                Title = "Requested Resource Not Found",
-                                Detail = "some-resource with ID=5 not found",
-                                Status = 404,
-                                Instance = "/some-resource/5",
-                                TraceId = "00-0af7651916cd43dd8448eb211c80319c-00f067aa0ba902b7-01",
-                                Errors = new Dictionary<string, string?[]?>()
-                                {
-                                    {"ErrorKey", new string[]{ "ResourceNotFound" } }
-                                }
-                            };
-                            return JsonSerializer.Serialize(problem);
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
                         })
                 );
-
 
             _mockServer
                 .Given(
                     Request.Create()
-                        .WithPath("/some-resource/6")
-                        .UsingMethod("GET")
+                    .WithPath("/commercial/convert")
+                    .UsingMethod("GET")
+                    .WithParam("from", new ExactMatcher("GEL"))
                 )
                 .RespondWith(
                     Response.Create()
                         .WithStatusCode(200)
-                        .WithHeader("some-header", "some value")
-                        .WithHeader("another-header", "another value")
-                        .WithBody(x =>
+                        .WithBodyAsJson(new ConvertCommercialRatesResponse
                         {
-                            
-                            return JsonSerializer.Serialize("{/");
+                            Amount = ConvertionAmount,
+                            From = "GEL",
+                            To = "USD",
+                            Value = 100.5M
                         })
                 );
 
-
-            #endregion
-
-            #region Post
             _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .UsingMethod("POST")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 1,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
+                .Given(
+                    Request.Create()
+                    .WithPath("/commercial/convert")
+                    .UsingMethod("GET")
+                    .WithParam("from", new ExactMatcher("AAA"))
 
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithParam("some-param")
-                   .UsingMethod("POST")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 1,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
-
-
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithBody(new HttpTestRequestModel
-                   {
-                       Id = 1,
-                       Date = new DateTime(1991, 07, 22),
-                       Name = "TestName"
-                   })
-                   .UsingMethod("POST")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 1,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
-
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithBody(new HttpTestRequestModel
-                   {
-                       Id = 1,
-                       Date = new DateTime(1991, 07, 22),
-                       Name = "TestName"
-                   })
-                   .WithParam("some-param")
-                   .UsingMethod("POST")
-               )
+                )
                 .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 1,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
-            #endregion
-
-            #region Put
+                    Response.Create()
+                        .WithStatusCode(400)
+                        .WithBodyAsJson(new
+                        {
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
+                        })
+                );
 
             _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .UsingMethod("PUT")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 2,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
+                .Given(
+                    Request.Create()
+                    .WithPath("/nbg")
+                    .UsingMethod("GET")
 
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithParam("some-param")
-                   .UsingMethod("PUT")
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 2,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
-
-
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .UsingMethod("PUT")
-                   .WithBody(new HttpTestRequestModel
-                   {
-                       Id = 2,
-                       Date = new DateTime(1991, 07, 22),
-                       Name = "TestName"
-                   })
-               )
-               .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 2,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
-
-            _mockServer
-               .Given(
-                   Request.Create()
-                   .WithPath("/some-resource")
-                   .WithParam("some-param")
-                   .WithBody(new HttpTestRequestModel
-                   {
-                       Id = 2,
-                       Date = new DateTime(1991, 07, 22),
-                       Name = "TestName"
-                   })
-                   .UsingMethod("PUT")
-               )
+                )
                 .RespondWith(
-                   Response.Create()
-                       .WithStatusCode(200)
-                       .WithHeader("some-header", "some value")
-                       .WithHeader("another-header", "another value")
-                       .WithBodyAsJson(new HttpTestResponseModel
-                       {
-                           Id = 2,
-                           Name = "TestName",
-                           Date = new DateTime(1991, 07, 22)
-                       })
-               );
+                    Response.Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new List<OfficialRate> {
+                            new OfficialRate
+                            {
+                                Currency = "EUR",
+                                Value = OfficialRateEur
+                            },
+                            new OfficialRate
+                            {
+                                Currency = "USD",
+                                Value = 2.9M
+                            }
+                        })
+                );
 
+            _mockServer
+                .Given(
+                    Request.Create()
+                    .WithPath("/nbg")
+                    .UsingMethod("GET")
+                    .WithParam("currency", new ExactMatcher("AAA"))
+
+                )
+                .RespondWith(
+                    Response.Create()
+                        .WithStatusCode(400)
+                        .WithBodyAsJson(new
+                        {
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
+                        })
+                );
+
+            _mockServer
+                .Given(
+                    Request.Create()
+                    .WithPath("/commercial")
+                    .UsingMethod("GET")
+
+                )
+                .RespondWith(
+                    Response.Create()
+                        .WithStatusCode(200)
+                        .WithBodyAsJson(new GetCommercialRatesResponse { 
+                            Base = "GEL",
+                            CommercialRatesList = new List<CommercialRates>
+                            {
+                                new CommercialRates
+                                {
+                                    Buy = 100.5M,
+                                    Currency = "EUR",
+                                    Sell = CommercialRateToSellEur
+                                },
+                                new CommercialRates {
+                                    Buy = 90.5M,
+                                    Currency = "USD",
+                                    Sell = 92.7M
+                                }
+                            }
+                        })
+                );
+
+            _mockServer
+                .Given(
+                    Request.Create()
+                    .WithPath("/commercial")
+                    .UsingMethod("GET")
+                    .WithParam("currency", new ExactMatcher("AAA"))
+                )
+                .RespondWith(
+                    Response.Create()
+                        .WithStatusCode(400)
+                        .WithBodyAsJson(new
+                        {
+                            title = ErrorMessage,
+                            detail = ErrorMessage,
+                            type = "error_type",
+                            status = (int)HttpStatusCode.BadRequest
+                        })
+                );
             #endregion
-
         }
 
         public void Dispose()
