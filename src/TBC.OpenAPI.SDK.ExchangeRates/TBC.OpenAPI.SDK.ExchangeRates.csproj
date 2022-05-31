@@ -59,6 +59,10 @@
 		</PackageReference>
 		<PackageReference Include="TBC.OpenAPI.SDK.Core" Version="1.0.0-pre4" />
 	</ItemGroup>
+	 
+	<ItemGroup>
+		<None Include="..\..\images\icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 	<Target Name="CalculateAssemblyVersions" AfterTargets="MinVer">
 		<PropertyGroup>
