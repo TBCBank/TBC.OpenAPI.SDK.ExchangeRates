@@ -6,8 +6,8 @@
 		<Nullable>enable</Nullable>
 		<IsPackable>true</IsPackable>
 		<PackageId>TBC.OpenAPI.SDK.ExchangeRates</PackageId>
-		<Title>TBC Open API Core</Title>
-		<Description>TBC Open API client SDKs</Description>
+		<Title>TBC Open API ExchangeRates</Title>
+		<Description>TBC Open API exchange rates client SDKs</Description>
 		<Copyright>TBC Bank</Copyright>
 		<PackageTags>OpenAPI;SDK;TBC</PackageTags>
 		<Company>TBC Bank</Company>
