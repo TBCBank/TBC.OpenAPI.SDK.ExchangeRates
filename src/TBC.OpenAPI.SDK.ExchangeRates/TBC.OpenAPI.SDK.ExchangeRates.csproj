@@ -13,6 +13,7 @@
 		<Company>TBC Bank</Company>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>icon.png</PackageIcon>
 		<PackageProjectUrl>https://developers.tbcbank.ge</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/TBCBank/TBC.OpenAPI.SDK.ExchangeRates</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
