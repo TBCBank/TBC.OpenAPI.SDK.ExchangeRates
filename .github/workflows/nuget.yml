@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: NuGet
+
+on:
+  push:
+    paths-ignore:
+      - 'images/**'
+      - 'docs/**'
+      - 'examples/**'
+      - 'packages/**'
+      - 'README.md'
+    tags:
+      - '**'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_DISABLE_GUI_ERRORS: 1
+      DOTNET_GENERATE_ASPNET_CERTIFICATE: 0
+      DOTNET_NOLOGO: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 10
+
+    - name: Setup .NET 6 SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        include-prerelease: false
+
+    # Use vanilla NuGet.exe because dotnet nuget command has a bug: it ignores --source parameter
+    - name: Setup NuGet.exe
+      uses: NuGet/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: latest
+        nuget-api-key-source: 'https://api.nuget.org/v3/index.json'
+
+    - name: Remove net framework example project
+      run: dotnet sln remove "examples\NetFrameworkExample\NetFrameworkExample.csproj"
+
+    - name: Restore
+      run: dotnet restore -p:Configuration=Release
+
+    - name: Build
+      run: dotnet build -c Release --no-restore -p:SourceRevisionId=$(git rev-parse --short $env:GITHUB_SHA)
+
+    - name: Test
+      run: | 
+        dotnet test -c Release --no-restore --no-build --verbosity normal
+    - name: Push TBC.OpenAPI.SDK.ExchangeRates
+      run: nuget push "src\TBC.OpenAPI.SDK.ExchangeRates\bin\Release\*.nupkg" -NonInteractive -SkipDuplicate -Source "https://api.nuget.org/v3/index.json" -NoSymbols -ForceEnglishOutput
