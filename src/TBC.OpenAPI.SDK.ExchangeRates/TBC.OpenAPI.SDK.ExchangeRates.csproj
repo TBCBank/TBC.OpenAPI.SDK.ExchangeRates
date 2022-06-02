@@ -58,7 +58,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="TBC.OpenAPI.SDK.Core" Version="1.0.0-pre4" />
+		<PackageReference Include="TBC.OpenAPI.SDK.Core" Version="[1.*,)" />
 	</ItemGroup>
 	 
 	<ItemGroup>
