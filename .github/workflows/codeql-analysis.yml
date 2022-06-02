@@ -16,6 +16,7 @@ on:
     branches: [master]
   schedule:
     - cron: '32 11 * * 3'
+  workflow_dispatch:    
 
 jobs:
   analyze:
@@ -60,6 +61,12 @@ jobs:
       with:
         dotnet-version: 6.0.x
         include-prerelease: false
+
+    - name: Remove net framework example project
+      run: dotnet sln remove "examples/NetFrameworkExample/NetFrameworkExample.csproj"
+
+    - name: Remove net framework example project files 
+      run: rm -r examples/NetFrameworkExample/*
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)

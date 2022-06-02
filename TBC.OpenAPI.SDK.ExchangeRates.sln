@@ -24,6 +24,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreConsoleAppExample", "ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetFrameworkExample", "examples\NetFrameworkExample\NetFrameworkExample.csproj", "{76062995-4DE6-4DBB-88A0-B181FE38878D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E7B9CF40-8417-4DB2-856F-F0E08EEEF6CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A436F998-9B48-424A-8352-D910AB34860D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\workflows\dependency-review.yml = .github\workflows\dependency-review.yml
+		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +70,7 @@ Global
 		{D117CA18-C90F-4C49-9A72-2ABA2CA52F07} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
 		{49D22A75-78FB-452E-94B5-61300EA73EA4} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
 		{76062995-4DE6-4DBB-88A0-B181FE38878D} = {322E62F9-79CE-40D6-A7D2-AC2375CF4C18}
+		{A436F998-9B48-424A-8352-D910AB34860D} = {E7B9CF40-8417-4DB2-856F-F0E08EEEF6CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EA70694-3D75-4295-9BE5-B779CA933036}
