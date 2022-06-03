@@ -68,9 +68,9 @@ Api invocation example:
 ​
 var result = await _exchangeRatesClient.GetOfficialRates(
 ​
-new string[] { "EUR", "USD"}
+new string[] { "EUR", "USD"},
 ​
-,cancellationToken
+cancellationToken
 ​
 );
 ​
