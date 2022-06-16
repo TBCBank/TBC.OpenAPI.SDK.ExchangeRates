@@ -1,27 +1,27 @@
 ﻿namespace TBC.OpenAPI.SDK.ExchangeRates.Models
 {
     /// <summary>
-    /// ოფიციალური კურსის კონვერტაციის დასაბრუნებელი მოდელი
+    /// Convertation by official exchange rate response model
     /// </summary>
     public class ConvertOfficialRatesResponse
     {
         /// <summary>
-        /// ვალუტა, რომლიდანაც კონვერტირდება
+        /// Base currency from which given amount was converted
         /// </summary>
-        public string? From { get; set; }
+        public string From { get; set; }
 
         /// <summary>
-        /// ვალუტა, რომელშიც კონვერტირდება
+        /// Target currency to which given amount was converted
         /// </summary>
-        public string? To { get; set; }
+        public string To { get; set; }
 
         /// <summary>
-        /// დასაკონვერტირებელი თანხა
+        /// Amount that was converted
         /// </summary>
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// კონვერტირებული თანხის რაოდენობა
+        /// Conversion result
         /// </summary>
         public decimal Value { get; set; }
     }

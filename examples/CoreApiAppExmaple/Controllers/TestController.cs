@@ -19,6 +19,7 @@ namespace CoreApiAppExmaple.Controllers
         public async Task<ActionResult<OfficialRate>> GetOfficialRates(CancellationToken cancellationToken = default)
         {
             var result = await _exchangeRatesClient.GetOfficialRates(new string[] { "EUR", "USD"},cancellationToken);
+            //var result = await _exchangeRatesClient.GetOfficialRatesByDate(new string[] { "EUR", "USD" }, "05-2022-01", cancellationToken);
             //var result = await _exchangeRatesClient.ConvertOfficialRates(120.4M,"GEL","USD", cancellationToken);
             //var result = await _exchangeRatesClient.GetCommercialRates(new string[] { "EUR", "USD" }, cancellationToken);
             //var result = await _exchangeRatesClient.ConvertCommercialRate(120.5M, "GEL", "USD" , cancellationToken);

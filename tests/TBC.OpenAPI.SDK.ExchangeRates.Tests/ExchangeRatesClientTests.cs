@@ -16,7 +16,8 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 {
     public class ExchangeRatesClientTests : IClassFixture<HttpHelperMocks>
     {
-        private ExchangeRatesClient _client;
+        private readonly ExchangeRatesClient _client;
+
         public ExchangeRatesClientTests(HttpHelperMocks mocks)
         {
             var mock = new Mock<IHttpClientFactory>();
@@ -99,6 +100,33 @@ namespace TBC.OpenAPI.SDK.Core.Tests
             var message = HttpHelperMocks.ErrorMessage;
 
             Func<Task> act = async () => await _client.GetOfficialRates(new string[] { "AAA" }, CancellationToken.None);
+
+            await act.Should().ThrowAsync<OpenApiException>()
+                .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));
+        }
+
+        [Fact]
+        public async Task GetOfficialRatesByDate_WhenSuccess_ReturnData()
+        {
+            var expectedValue = HttpHelperMocks.OfficialRateEur;
+            var expectedCount = 2;
+
+            var result = await _client.GetOfficialRatesByDate(new string[] { "EUR", "USD" }, "2022-05-01", CancellationToken.None);
+
+            using (new AssertionScope())
+            {
+                result.Should().NotBeNull();
+                result.Count.Should().Be(expectedCount);
+                result[0].Value.Should().Be(expectedValue);
+            }
+        }
+
+        [Fact]
+        public async Task GetOfficialRatesByDate_WhenNotSuccess_ReturnProblemJson()
+        {
+            var message = HttpHelperMocks.ErrorMessage;
+
+            Func<Task> act = async () => await _client.GetOfficialRatesByDate(new string[] { "AAA" }, "2022-05-01", CancellationToken.None);
 
             await act.Should().ThrowAsync<OpenApiException>()
                 .Where(e => e.Message.StartsWith(HttpHelperMocks.ErrorMessage));

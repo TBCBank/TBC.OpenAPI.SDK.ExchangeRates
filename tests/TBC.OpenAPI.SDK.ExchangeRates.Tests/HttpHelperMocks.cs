@@ -170,15 +170,15 @@ namespace TBC.OpenAPI.SDK.Core.Tests
                         .WithStatusCode(200)
                         .WithBodyAsJson(new GetCommercialRatesResponse { 
                             Base = "GEL",
-                            CommercialRatesList = new List<CommercialRates>
+                            CommercialRatesList = new List<CommercialRate>
                             {
-                                new CommercialRates
+                                new CommercialRate
                                 {
                                     Buy = 100.5M,
                                     Currency = "EUR",
                                     Sell = CommercialRateToSellEur
                                 },
-                                new CommercialRates {
+                                new CommercialRate {
                                     Buy = 90.5M,
                                     Currency = "USD",
                                     Sell = 92.7M

@@ -1,17 +1,17 @@
 ﻿namespace TBC.OpenAPI.SDK.ExchangeRates.Models
 {
     /// <summary>
-    /// ოფიციალური კურსის მოდელი
+    /// Official exchange rates response model
     /// </summary>
     public class OfficialRate
     {
         /// <summary>
-        /// ვალუტა
+        /// 3-digit Currency code
         /// </summary>
-        public string? Currency { get; set; }
+        public string Currency { get; set; }
 
         /// <summary>
-        /// კურსი
+        /// Official exchange rate value
         /// </summary>
         public decimal Value { get; set; }
     }

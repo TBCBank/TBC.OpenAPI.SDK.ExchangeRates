@@ -1,19 +1,18 @@
 ﻿namespace TBC.OpenAPI.SDK.ExchangeRates.Models
 {
-
     /// <summary>
-    /// კომერციული კურსის დასაბრუნებელი მოდელი
+    /// TBC Bank's commercial exchange rates response model
     /// </summary>
     public class GetCommercialRatesResponse
     {
         /// <summary>
-        /// საბაზისო ვალუტა
+        /// Base currency (GEL)
         /// </summary>
-        public string? Base { get; set; }
+        public string Base { get; set; }
 
         /// <summary>
-        /// ვალუტის კომერციული კურსების სია
+        /// List of currency exchange rate pairs
         /// </summary>
-        public List<CommercialRates>? CommercialRatesList { get; set; }
+        public List<CommercialRate> CommercialRatesList { get; set; }
     }
 }
