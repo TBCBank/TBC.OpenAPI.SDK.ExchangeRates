@@ -1,22 +1,22 @@
 ﻿namespace TBC.OpenAPI.SDK.ExchangeRates.Models
 {
     /// <summary>
-    /// კომერციული კურსის მოდელი
+    /// TBC Bank's commercial exchange rate response model
     /// </summary>
-    public class CommercialRates
+    public class CommercialRate
     {
         /// <summary>
-        /// ვალუტა
+        /// 3-digit currency code
         /// </summary>
-        public string? Currency { get; set; }
+        public string Currency { get; set; }
 
         /// <summary>
-        /// ყიდვის კურსი
+        /// Rate value at which bank is buying target currency
         /// </summary>
         public decimal Buy { get; set; }
 
         /// <summary>
-        /// გაყიდვის კურსი
+        /// Rate value at which bank is selling target currency
         /// </summary>
         public decimal Sell { get; set; }
     }

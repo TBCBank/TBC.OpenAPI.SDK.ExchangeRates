@@ -9,8 +9,8 @@ namespace TBC.OpenAPI.SDK.ExchangeRates.Extensions
 
         public static OpenApiClientFactoryBuilder AddExchangeRatesClient(this OpenApiClientFactoryBuilder builder,
             ExchangeRatesClientOptions options,
-            Action<HttpClient>? configureClient = null,
-            Func<HttpClientHandler>? configureHttpMessageHandler = null)
+            Action<HttpClient> configureClient = null,
+            Func<HttpClientHandler> configureHttpMessageHandler = null)
         {
             return builder.AddClient<IExchangeRatesClient, ExchangeRatesClient, ExchangeRatesClientOptions>(options, configureClient, configureHttpMessageHandler);
         }
