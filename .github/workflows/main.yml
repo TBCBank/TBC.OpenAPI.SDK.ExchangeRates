@@ -46,7 +46,7 @@ jobs:
         include-prerelease: false
         
     - name: Remove net framework example project
-      run: dotnet sln remove "examples/NetFrameworkExample/NetFrameworkExample.csproj"
+      run: dotnet sln remove "examples\NetFrameworkExample\NetFrameworkExample.csproj"
       
     - name: Restore
       run: dotnet restore -p:Configuration=Release
