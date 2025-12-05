@@ -8,7 +8,7 @@ Exchange Rates SDKs for TBC OpenAPI
 ​
 Repository contains the SDK for simplifying TBC Open API Exchange Rate API invocations on C# client application side.\
 ​
-Library is written in the C # programming language and is compatible with .netstandard2.0 and .net6.0.
+Library is written in the C # programming language and is compatible with .netstandard2.0 and .net9.0.
 ​
 ## Prerequisites
 ​
