@@ -28,14 +28,14 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 10
 
-    - name: Setup .NET 6 SDK
-      uses: actions/setup-dotnet@v2
+    - name: Setup .NET 9 SDK
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 9.0.x
         include-prerelease: false
 
     # Use vanilla NuGet.exe because dotnet nuget command has a bug: it ignores --source parameter
@@ -44,10 +44,9 @@ jobs:
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
         nuget-version: latest
-        nuget-api-key-source: 'https://api.nuget.org/v3/index.json'
 
     - name: Remove net framework example project
-      run: dotnet sln remove "examples\NetFrameworkExample\NetFrameworkExample.csproj"
+      run: dotnet sln remove "examples/NetFrameworkExample/NetFrameworkExample.csproj"
 
     - name: Restore
       run: dotnet restore -p:Configuration=Release
@@ -56,7 +55,6 @@ jobs:
       run: dotnet build -c Release --no-restore -p:SourceRevisionId=$(git rev-parse --short $env:GITHUB_SHA)
 
     - name: Test
-      run: | 
-        dotnet test -c Release --no-restore --no-build --verbosity normal
+      run: dotnet test -c Release --no-restore --no-build --verbosity normal
     - name: Push TBC.OpenAPI.SDK.ExchangeRates
-      run: nuget push "src\TBC.OpenAPI.SDK.ExchangeRates\bin\Release\*.nupkg" -NonInteractive -SkipDuplicate -Source "https://api.nuget.org/v3/index.json" -NoSymbols -ForceEnglishOutput
+      run: nuget push "src/TBC.OpenAPI.SDK.ExchangeRates/bin/Release/*.nupkg" -NonInteractive -SkipDuplicate -Source "https://api.nuget.org/v3/index.json" -NoSymbols -ForceEnglishOutput
