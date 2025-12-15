@@ -40,7 +40,7 @@ jobs:
 
     # Use vanilla NuGet.exe because dotnet nuget command has a bug: it ignores --source parameter
     - name: Setup NuGet.exe
-      uses: NuGet/setup-nuget@v1
+      uses: NuGet/setup-nuget@v2
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
         nuget-version: latest
