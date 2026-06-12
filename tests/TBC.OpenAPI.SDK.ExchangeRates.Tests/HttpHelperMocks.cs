@@ -34,7 +34,6 @@ namespace TBC.OpenAPI.SDK.Core.Tests
 
         private void AddGetMocks()
         {
-
             #region Get
             _mockServer
                 .Given(
